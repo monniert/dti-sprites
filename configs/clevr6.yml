@@ -1,0 +1,49 @@
+dataset:
+  name: clevr6
+model:
+  name: dti_sprites
+  n_sprites: 6
+  n_backgrounds: 1
+  n_objects: 6
+  freeze_sprite: 40
+  inject_noise: 0.4
+  encoder_name: resnet18
+  with_pool: [2, 2]
+  transformation_sequence: identity_projective
+  transformation_sequence_bkg: color
+  transformation_sequence_layer: color_position
+  curriculum_learning: [150]
+  curriculum_learning_bkg: False
+  curriculum_learning_layer: False
+  proto_init: constant
+  mask_init: gaussian
+  bkg_init: mean
+  sprite_size: [40, 40]
+  gaussian_weights_std: 10
+  pred_occlusion: True
+  estimate_minimum: True
+  greedy_algo_iter: 3
+  add_empty_sprite: True
+  lambda_empty_sprite: 1.0e-4
+training:
+  batch_size: 32
+  n_workers: 4
+  optimizer:
+    name: adam
+    lr: 1.0e-4
+    transformer:
+      weight_decay: 1.0e-6
+  scheduler:
+    name: multi_step
+    gamma: [1, 0.1]
+    milestones: [250, 400]
+  n_epoches: 450
+  train_stat_interval: 1000
+  val_stat_interval: 2000
+  check_cluster_interval: 250
+  eval_with_bkg: True
+  eval_semantic: True
+  seed: 41459
+  visualizer_port:
+  pretrained: 
+  resume: 

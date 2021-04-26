@@ -1,0 +1,32 @@
+# OS generated files
+*.swp
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# python
+*.py.swp
+*.pyc
+*.pyo
+
+# heavy files
+*.pkl
+*.html
+*.zip
+
+# data and others
+jz_*
+/datasets
+/results
+/runs
+/jeanzay
+/visdom
+/notebook

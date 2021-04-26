@@ -1,0 +1,49 @@
+dataset:
+  name: dsprites_gray
+model:
+  name: dti_sprites
+  n_sprites: 3
+  n_backgrounds: 1
+  n_objects: 5
+  freeze_sprite: 10
+  inject_noise: 0.4
+  encoder_name: resnet32
+  with_pool: [4, 4]
+  transformation_sequence: identity_similarity
+  transformation_sequence_bkg: color
+  transformation_sequence_layer: color_position
+  curriculum_learning: [20]
+  curriculum_learning_bkg: False
+  curriculum_learning_layer: False
+  proto_init: constant
+  mask_init: gaussian
+  bkg_init: constant
+  sprite_size: [28, 28]
+  gaussian_weights_std: 7
+  pred_occlusion: True
+  estimate_minimum: True
+  greedy_algo_iter: 3
+  add_empty_sprite: True
+  lambda_empty_sprite: 1.0e-4
+training:
+  batch_size: 32
+  n_workers: 4
+  optimizer:
+    name: adam
+    lr: 1.0e-4
+    transformer:
+      weight_decay: 1.0e-6
+  scheduler:
+    name: multi_step
+    gamma: [1, 0.1]
+    milestones: [250, 500]
+  n_epoches: 510
+  train_stat_interval: 2000
+  val_stat_interval: 4000
+  check_cluster_interval: 100
+  eval_with_bkg: True
+  eval_semantic: True
+  seed: 98469
+  visualizer_port:
+  pretrained: 
+  resume: 
