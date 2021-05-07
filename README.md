@@ -91,10 +91,10 @@ where:
 
 Results are saved at `runs/${DATASET}/${DATE}_${run_tag}` where `DATASET` is the dataset name 
 specified in `filename.yml` and `DATE` is the current date in `mmdd` format. Some training 
-visual results like sprites evolution and reconstruction media will be saved. Here is an 
-example from Tetrominoes dataset:
+visual results like sprites evolution and reconstruction examples
+will be saved. Here is an example from Tetrominoes dataset:
 
-#### Reconstruction media
+#### Reconstruction examples
 
 ![tetro_rec.gif](./media/tetro_rec.gif)
 
@@ -133,7 +133,7 @@ That's it!
 
 ![santa_sprites.jpg](./media/santa_sprites.jpg)
 
-#### Decomposition media
+#### Decomposition examples
 
 ![santa_rec.jpg](./media/santa_rec.jpg)
 
