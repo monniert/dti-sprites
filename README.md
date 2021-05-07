@@ -6,7 +6,7 @@ Prototypes"**](https://arxiv.org/abs/2104.14575) paper
 Check out our [**paper**](https://arxiv.org/abs/2104.14575) and 
 [**webpage**](https://imagine.enpc.fr/~monniert/DTI-Sprites) for details!
 
-![teaser.jpg](./examples/teaser.jpg)
+![teaser.jpg](./media/teaser.jpg)
 
 If you find this code useful in your research, please cite:
 
@@ -91,18 +91,18 @@ where:
 
 Results are saved at `runs/${DATASET}/${DATE}_${run_tag}` where `DATASET` is the dataset name 
 specified in `filename.yml` and `DATE` is the current date in `mmdd` format. Some training 
-visual results like sprites evolution and reconstruction examples will be saved. Here is an 
+visual results like sprites evolution and reconstruction media will be saved. Here is an 
 example from Tetrominoes dataset:
 
-#### Reconstruction examples
+#### Reconstruction media
 
-![tetro_rec.gif](./examples/tetro_rec.gif)
+![tetro_rec.gif](./media/tetro_rec.gif)
 
 #### Sprites evolution and final
 
-![tetro_sprites.gif](./examples/tetro_sprites.gif)
+![tetro_sprites.gif](./media/tetro_sprites.gif)
 
-![tetro_sprites_final.png](./examples/tetro_sprites_final.png)
+![tetro_sprites_final.png](./media/tetro_sprites_final.png)
 
 More visual results are available at 
 https://imagine.enpc.fr/~monniert/DTI-Sprites/extra_results/.
@@ -131,11 +131,11 @@ That's it!
 
 #### Top 8 sprites discovered
 
-![santa_sprites.jpg](./examples/santa_sprites.jpg)
+![santa_sprites.jpg](./media/santa_sprites.jpg)
 
-#### Decomposition examples
+#### Decomposition media
 
-![santa_rec.jpg](./examples/santa_rec.jpg)
+![santa_rec.jpg](./media/santa_rec.jpg)
 
 ## Further information
 
