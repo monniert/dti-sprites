@@ -23,6 +23,7 @@ Thumbs.db
 *.zip
 
 # data and others
+download_data_enpc.sh
 jz_*
 /datasets
 /results
