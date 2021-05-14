@@ -5,7 +5,7 @@ mkdir -p datasets
 gdown --id 1unCVwJbytG1wHZCQfk41otdtmR8yU1AH -O tetrominoes.zip
 unzip tetrominoes.zip && rm tetrominoes.zip
 mv tetrominoes datasets/
-gdown --id 110RrDlhx_fjXymzmTx1nkC3ZMPmMXjsv -O dsprites_gray.zip
+gdown --id 1VKlFHvdcjWd2sQYuFB9D5oXlV1cLjlSc -O dsprites_gray.zip
 unzip dsprites_gray.zip && rm dsprites_gray.zip
 mv dsprites_gray datasets/
 gdown --id 12c7ZRNWKzqosz5aUOfL0XBmLHrcN240r -O clevr6.zip
