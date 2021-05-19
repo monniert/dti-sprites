@@ -154,10 +154,6 @@ class DTISprites(nn.Module):
     def are_sprite_frozen(self):
         return True if self.freeze_milestone > 0 and self.cur_epoch < self.freeze_milestone else False
 
-    @property
-    def are_bkg_frozen(self):
-        return True if self.freeze_bkg_milestone > 0 and self.cur_epoch < self.freeze_bkg_milestone else False
-
     def cluster_parameters(self):
         params = [self.prototype_params, self.mask_params]
         if self.learn_backgrounds:
@@ -225,8 +221,6 @@ class DTISprites(nn.Module):
 
         if self.learn_backgrounds:
             backgrounds = self.backgrounds.unsqueeze(1).expand(M, B, C, -1, -1)
-            if self.are_bkg_frozen:
-                backgrounds = backgrounds.detach()
             tsf_bkgs = self.bkg_transformer(x, backgrounds, features)[1].transpose(0, 1)  # MBCHW
         else:
             tsf_bkgs = None
