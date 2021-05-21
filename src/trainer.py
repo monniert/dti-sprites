@@ -23,8 +23,7 @@ from scheduler import get_scheduler
 from utils import use_seed, coerce_to_path_and_check_exist, coerce_to_path_and_create_dir
 from utils.image import convert_to_img, save_gif
 from utils.logger import get_logger, print_info, print_warning
-from utils.metrics import (AverageTensorMeter, AverageMeter, Metrics, Scores, SegmentationScores, InstanceSegScores,
-                           SequenceScores)
+from utils.metrics import (AverageTensorMeter, AverageMeter, Metrics, Scores, SegmentationScores, InstanceSegScores)
 from utils.path import CONFIGS_PATH, RUNS_PATH
 from utils.plot import plot_bar, plot_lines
 
@@ -96,7 +95,6 @@ class Trainer:
                                 .format(self.batch_size, self.n_workers))
         self.seg_eval = getattr(train_dataset, 'seg_eval', False)
         self.instance_eval = getattr(train_dataset, 'instance_eval', False)
-        self.sequence_eval = getattr(train_dataset, 'sequence_eval', False)
 
         self.n_batches = len(self.train_loader)
         self.n_iterations, self.n_epoches = cfg["training"].get("n_iterations"), cfg["training"].get("n_epoches")
@@ -188,9 +186,6 @@ class Trainer:
             self.val_scores = SegmentationScores(self.n_classes)
         elif self.instance_eval:
             self.val_scores = InstanceSegScores(self.n_objects + 1, with_bkg=self.eval_with_bkg)
-        elif self.sequence_eval:
-            self.seq_len = train_dataset.seq_len
-            self.val_scores = SequenceScores(self.n_classes, self.seq_len)
         else:
             self.val_scores = Scores(self.n_classes, self.n_prototypes)
         self.val_scores_path = self.run_dir / VAL_SCORES_FILE
@@ -198,13 +193,10 @@ class Trainer:
             with open(self.val_scores_path, mode="w") as f:
                 f.write("iteration\tepoch\tbatch\t" + "\t".join(self.val_scores.names) + "\n")
 
-        # Prototypes & Variances
+        # Prototypes
         self.check_cluster_interval = cfg["training"]["check_cluster_interval"]
         self.prototypes_path = coerce_to_path_and_create_dir(self.run_dir / 'prototypes')
         [coerce_to_path_and_create_dir(self.prototypes_path / f'proto{k}') for k in range(self.n_prototypes)]
-        if self.is_gmm:
-            self.variances_path = coerce_to_path_and_create_dir(self.run_dir / 'variances')
-            [coerce_to_path_and_create_dir(self.variances_path / f'var{k}') for k in range(self.n_prototypes)]
 
         if self.learn_masks:
             self.masked_prototypes_path = coerce_to_path_and_create_dir(self.run_dir / 'masked_prototypes')
@@ -553,7 +545,7 @@ class Trainer:
             self.visualizer.line(y, x, win='global_scores', update='append',
                                  opts=dict(title='global_scores', legend=names, width=VIZ_WIDTH, height=VIZ_HEIGHT))
 
-            if not self.instance_eval and not self.sequence_eval:
+            if not self.instance_eval:
                 name = 'acc' if not self.seg_eval else 'iou'
                 N = self.n_classes
                 y = [[self.val_scores[f'{name}_cls{i}'] for i in range(N)]]
@@ -621,16 +613,9 @@ class Trainer:
 
                     self.val_scores.update(labels.long().numpy(), target.long().numpy())
 
-            elif self.sequence_eval:
-                target = self.model.transform(images, pred_seq_labels=True).cpu()
-                self.val_scores.update(labels.long().numpy(), target.long().numpy())
-
             else:
-                if self.n_objects > 1:
-                    target = self.model.transform(images, pred_center_labels=True)
-                    self.val_scores.update(labels.long().numpy(), target.cpu().numpy())
-                else:
-                    self.val_scores.update(labels.long().numpy(), argmin_idx.cpu().numpy())
+                assert self.n_objects == 1
+                self.val_scores.update(labels.long().numpy(), argmin_idx.cpu().numpy())
 
     def log_val_metrics(self, cur_iter, epoch, batch):
         stat = PRINT_VAL_STAT_FMT(epoch, self.n_epoches, batch, self.n_batches, self.val_metrics)
@@ -1077,11 +1062,8 @@ class Trainer:
             dist_min_by_sample, argmin_idx = distances.min(1)
 
             loss.update(dist_min_by_sample.mean(), n=len(dist_min_by_sample))
-            if self.n_objects > 1:
-                target = self.model.transform(images, pred_center_labels=True)
-                scores.update(labels.long().numpy(), target.cpu().numpy())
-            else:
-                scores.update(labels.long().numpy(), argmin_idx.cpu().numpy())
+            assert self.n_objects == 1
+            scores.update(labels.long().numpy(), argmin_idx.cpu().numpy())
 
         scores = scores.compute()
         self.print_and_log_info("final_loss: {:.4f}".format(loss.avg))

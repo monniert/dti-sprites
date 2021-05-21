@@ -118,59 +118,6 @@ class Scores:
         return matrix
 
 
-class SequenceScores:
-    """Compute the following scores: sequence accuracy + character error rate (CER)"""
-
-    def __init__(self, n_classes, max_len_seq):
-        self.n_classes = n_classes
-        self.max_len_seq = max_len_seq
-        self.names = ['seq_acc', 'cer']
-        self.values = OrderedDict(zip(self.names, [0] * len(self.names)))
-        self.score_name = 'seq_acc'
-        self.reset()
-
-    def reset(self):
-        self.labels_true = np.zeros((0, self.max_len_seq), dtype=np.int64)
-        self.labels_pred = np.zeros((0, self.max_len_seq), dtype=np.int64)
-
-    def compute(self):
-        mapping = self.infer_class_to_cluster_mapping()
-        gt = self.labels_true
-        pred = np.zeros(self.labels_pred.shape, dtype=np.int64)
-        for k, v in mapping.items():
-            pred[self.labels_pred == v] = k
-
-        seq_acc = np.all(gt == pred, axis=1).sum() / len(gt)
-
-        # CER
-        mask = gt != 10
-        non_empty_gt = gt[mask]
-        N = len(non_empty_gt)
-        n_error = (gt[mask] != pred[mask]).sum()
-        n_extra_digit_error = (pred[~mask] != 10).sum()
-        cer = (n_error + n_extra_digit_error) / N
-        self.values = OrderedDict(zip(self.names, [seq_acc, cer]))
-        return self.values
-
-    def __getitem__(self, k):
-        return self.values[k]
-
-    def update(self, labels_true, labels_pred):
-        if labels_pred.shape[1] < self.max_len_seq:
-            empty_id = self.n_classes - 1
-            labels_pred = np.hstack([labels_pred, np.ones((len(labels_pred), 1), dtype=np.int64) * empty_id])
-        self.labels_true = np.vstack([self.labels_true, labels_true])
-        self.labels_pred = np.vstack([self.labels_pred, labels_pred])
-
-    def infer_class_to_cluster_mapping(self):
-        labels_true, labels_pred = self.labels_true.flatten(), self.labels_pred.flatten()
-        # XXX 100x faster than sklearn.metrics.confusion matrix, returns matrix with GT as rows, pred as columns
-        matrix = np.bincount(self.n_classes * labels_true + labels_pred,
-                             minlength=self.n_classes**2).reshape(self.n_classes, self.n_classes)
-        best_assign_idx = linear_sum_assignment(-matrix)[1]
-        return {k: v for k, v in enumerate(best_assign_idx)}
-
-
 class SegmentationScores:
     """
     Compute the following metrics:
