@@ -244,9 +244,6 @@ class DTISprites(nn.Module):
         if self.pred_occlusion:
             inp = features if features is not None else x
             occ_grid = self.occ_predictor(inp)  # view(-1, L, L)
-            if self.occ_noise > 0 and self.training:
-                N = int(L * (L - 1) / 2)
-                occ_grid += (2 * self.occ_noise * torch.rand(B, N, device=occ_grid.device) - self.occ_noise)
             occ_grid = torch.sigmoid(occ_grid)
             grid = torch.zeros(B, L, L, device=x.device)
             indices = torch.tril_indices(row=L, col=L, offset=-1)

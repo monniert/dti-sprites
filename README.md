@@ -116,7 +116,7 @@ cuda=gpu_id config=tetro.yml tag=default ./multi_pipeline.sh
 
 Available configs are:
 
-- Multi-object benchmarks: `tetro.yml`, `dpsrites_gray.yml`, `clevr6.yml`
+- Multi-object benchmarks: `tetro.yml`, `dsprites.yml`, `clevr6.yml`
 - Clustering benchmarks: `gtsrb8.yml`, `svhn.yml`
 - Cosegmentation dataset: `horse.yml`
 

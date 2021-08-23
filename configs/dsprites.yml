@@ -44,6 +44,6 @@ training:
   eval_with_bkg: True
   eval_semantic: True
   seed: 98469
-  visualizer_port:
+  visualizer_port: 8888
   pretrained: 
   resume: 
