@@ -1,7 +1,7 @@
 # DTI-Sprites
 
 Pytorch implementation of [**"Unsupervised Layered Image Decomposition into Object 
-Prototypes"**](https://arxiv.org/abs/2104.14575) paper
+Prototypes"**](https://arxiv.org/abs/2104.14575) paper (accepted to ICCV 2021)
 
 Check out our [**paper**](https://arxiv.org/abs/2104.14575) and 
 [**webpage**](https://imagine.enpc.fr/~monniert/DTI-Sprites) for details!
@@ -11,10 +11,10 @@ Check out our [**paper**](https://arxiv.org/abs/2104.14575) and
 If you find this code useful in your research, please cite:
 
 ```
-@article{monnier2021dtisprites,
+@inproceedings{monnier2021dtisprites,
   title={{Unsupervised Layered Image Decomposition into Object Prototypes}},
   author={Monnier, Tom and Vincent, Elliot and Ponce, Jean and Aubry, Mathieu},
-  journal={arXiv},
+  booktitle={ICCV},
   year={2021},
 }
 ```
