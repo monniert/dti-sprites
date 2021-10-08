@@ -127,15 +127,11 @@ Available configs are:
    Instagram.
 2. Launch training with `cuda=gpu_id config=instagram.yml tag=santaphoto ./pipeline.sh`
 
-That's it!
+That's it! Overall you should end up with the following qualitative results:
 
-#### Top 8 sprites discovered
+#### Automatically discovered sprites 
 
-![santa_sprites.jpg](./media/santa_sprites.jpg)
-
-#### Decomposition examples
-
-![santa_rec.jpg](./media/santa_rec.jpg)
+![sprites.jpg](./media/sprites.jpg)
 
 ## Further information
 
