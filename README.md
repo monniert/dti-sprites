@@ -6,7 +6,7 @@ Prototypes"**](https://arxiv.org/abs/2104.14575) paper (accepted to ICCV 2021)
 Check out our [**paper**](https://arxiv.org/abs/2104.14575) and 
 [**webpage**](https://imagine.enpc.fr/~monniert/DTI-Sprites) for details!
 
-![teaser.jpg](./media/sprites.jpg)
+![teaser.jpg](./media/teaser.jpg)
 
 If you find this code useful in your research, please cite:
 
