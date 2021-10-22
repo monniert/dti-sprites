@@ -3,7 +3,7 @@
 Pytorch implementation of [**"Unsupervised Layered Image Decomposition into Object 
 Prototypes"**](https://arxiv.org/abs/2104.14575) paper (accepted to ICCV 2021)
 
-Check out our [**paper**](https://arxiv.org/abs/2104.14575) and 
+Check out our [**paper**](https://openaccess.thecvf.com/content/ICCV2021/papers/Monnier_Unsupervised_Layered_Image_Decomposition_Into_Object_Prototypes_ICCV_2021_paper.pdf) and 
 [**webpage**](http://imagine.enpc.fr/~monniert/DTI-Sprites) for details!
 
 ![teaser.jpg](./media/teaser.jpg)
