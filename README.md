@@ -8,7 +8,7 @@ Check out our [**paper**](https://openaccess.thecvf.com/content/ICCV2021/papers/
 
 ![teaser.jpg](./media/teaser.jpg)
 
-If you find this code useful in your research, please cite:
+If you find this code useful, don't forget to star the repo ⭐ and cite the paper:
 
 ```
 @inproceedings{monnier2021dtisprites,
