@@ -227,7 +227,7 @@ class DTISprites(nn.Module):
 
         if self.inject_noise and self.training:
             noise = torch.rand(K, 1, H, W, device=x.device)[None, None, ...].expand(L, B, K, 1, H, W).transpose(1, 2)
-            tsf_masks += tsf_noise * (2 * self.inject_noise * noise - self.inject_noise)
+            tsf_masks = tsf_masks + tsf_noise * (2 * self.inject_noise * noise - self.inject_noise)
             tsf_masks = self.clamp_func(tsf_masks)
 
         occ_grid = self.predict_occlusion_grid(x, features)  # LLB
