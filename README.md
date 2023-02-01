@@ -64,7 +64,7 @@ gdrive links, unzip and move them to the `datasets` folder:
 - [Tetrominoes gdrive 
   link](https://drive.google.com/file/d/1unCVwJbytG1wHZCQfk41otdtmR8yU1AH/view?usp=sharing)
 - [Multi-dSprites gdrive 
-  link](https://drive.google.com/file/d/110RrDlhx_fjXymzmTx1nkC3ZMPmMXjsv/view?usp=sharing)
+  link](https://drive.google.com/file/d/1VKlFHvdcjWd2sQYuFB9D5oXlV1cLjlSc/view?usp=sharing)
 - [CLEVR6 gdrive 
   link](https://drive.google.com/file/d/12c7ZRNWKzqosz5aUOfL0XBmLHrcN240r/view?usp=sharing)
 - [GTSRB gdrive 
